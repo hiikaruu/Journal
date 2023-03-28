@@ -12,5 +12,15 @@ namespace WpfApp3.ViewModels.Base
             get => _Title;
             set => Set(ref _Title, value);
         }
+        
+        #region Status : string - Статус программы
+        private string _Status = "Готов!";
+        public string Status
+        {
+            get => _Status;
+            set => Set(ref _Status, value);
+        }
+        #endregion
+
     }
 }
