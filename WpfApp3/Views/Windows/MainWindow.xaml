@@ -17,10 +17,32 @@
             <MenuItem Header="Выход"/>
             
         </Menu>
-        <StatusBar DockPanel.Dock="Bottom"></StatusBar>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem MaxWidth="350" MinWidth="150">
+                <TextBlock Text="zxc"/>
+            </StatusBarItem>
+            <StatusBarItem>
+                <ProgressBar Width="120" Height="14" Value="30"/>
+            </StatusBarItem>
+        </StatusBar>
         <TabControl>
-            <TabItem></TabItem>
-            <TabItem></TabItem>
+            <TabItem Header="Panel1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60*"/>
+                        <RowDefinition Height="320*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="157*"/>
+                        <ColumnDefinition Width="637*"/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Grid.Column="0" Grid.Row="0" Margin="5,7" Fill="AliceBlue" Stroke="Aqua" StrokeThickness="3" RadiusX="5" RadiusY="7"/>
+                    <Ellipse Grid.Column="2" Grid.Row="0" Margin="5,7" Fill="AliceBlue" Stroke="Aqua" StrokeThickness="3"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Panel2">
+                
+            </TabItem>
         </TabControl>
     </DockPanel>
 </Window>
