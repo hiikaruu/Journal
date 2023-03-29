@@ -3,19 +3,46 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:vm="clr-namespace:WpfApp3.ViewModels.Base"
-        xmlns:local="clr-namespace:WpfApp3" 
+        xmlns:sdm="clr-namespace:WpfApp3.Infrastructure.Commands"
+        xmlns:fa="http://schemas.fontawesome.com/icons/"
+        xmlns:oxy="http://oxyplot.org/wpf"
+
+        xmlns:local="clr-namespace:WpfApp3" xmlns:vm1="clr-namespace:WpfApp3.ViewModels"
         mc:Ignorable="d"
         Title="{Binding Title}"
         Height="450" Width="800">
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Control" Key="Q" Command="{Binding CloseApplicationCommand}"/>
+    </Window.InputBindings>
     <Window.DataContext>
-        <vm:MainWindowViewModel/>
+        <vm1:MainWindowViewModel/>
     </Window.DataContext>
+    <Window.Resources>
+        <sdm:CloseApplicationCommand x:Key="CloseApplicationCommand"/>
+    </Window.Resources>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл"/>
-            <MenuItem Header="Выход"/>
-            
+            <!--<MenuItem Header="Выход"  Command="{Binding CloseApplicationCommand}"/>-->
+            <!--<MenuItem Header="Выход">
+                <MenuItem.Command>
+                    <sdm:CloseApplicationCommand/>
+                </MenuItem.Command>
+            </MenuItem>-->
+            <MenuItem Header="Выход" Command="{StaticResource CloseApplicationCommand}"/>
+            <MenuItem Header="Помощь">
+                <MenuItem Header="О программе"/>
+            </MenuItem>
+            <MenuItem Command="{Binding ChangeTabIndexCommand}" CommandParameter="-1">
+                <MenuItem.Header>
+                    <fa:ImageAwesome Height="12" Icon="Regular_ArrowAltCircleLeft"/>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem Command="{Binding ChangeTabIndexCommand}" CommandParameter="+1">
+                <MenuItem.Header>
+                    <fa:ImageAwesome Height="12" Icon="Regular_ArrowAltCircleRight"/>
+                </MenuItem.Header>
+            </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem MaxWidth="350" MinWidth="150">
@@ -25,8 +52,15 @@
                 <ProgressBar Width="120" Height="14" Value="30"/>
             </StatusBarItem>
         </StatusBar>
-        <TabControl>
-            <TabItem Header="Panel1">
+        <TabControl SelectedIndex="{Binding SelectedPageIndex}">
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <!--<Image Source=""></Image>-->
+                        <fa:ImageAwesome Icon="Regular_File" Height="12" Margin="5" Foreground="Aqua"/>
+                        <TextBlock Text="Panel1"/>
+                    </StackPanel>
+                </TabItem.Header>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="60*"/>
@@ -37,13 +71,16 @@
                         <ColumnDefinition Width="637*"/>
                     </Grid.ColumnDefinitions>
                     <Rectangle Grid.Column="0" Grid.Row="0" Margin="5,7" Fill="AliceBlue" Stroke="Aqua" StrokeThickness="3" RadiusX="5" RadiusY="7"/>
-                    <Ellipse Grid.Column="2" Grid.Row="0" Margin="5,7" Fill="AliceBlue" Stroke="Aqua" StrokeThickness="3"/>
+                    <Ellipse Grid.Column="2" Grid.Row="0" Margin="5,7" Fill="AliceBlue" Stroke="Aqua" StrokeThickness="3">
+                        <Ellipse.InputBindings>
+                            <MouseBinding Command="{Binding CloseApplicationCommand}" MouseAction="LeftDoubleClick"/>
+
+                        </Ellipse.InputBindings>
+                    </Ellipse>
                     <GridSplitter Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" Width="4"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Panel2">
-                
-            </TabItem>
+            <TabItem Header="График"/>
         </TabControl>
     </DockPanel>
 </Window>
