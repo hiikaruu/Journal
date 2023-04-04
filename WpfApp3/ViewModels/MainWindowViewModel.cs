@@ -149,7 +149,7 @@ namespace WpfApp3.ViewModels
             });
             Groups = new ObservableCollection<Group>(groups);
             var data_list = new List<object>();
-            data_list.Add("Helo World!");
+            data_list.Add("Ъуъ");
             data_list.Add(42);
             var group = Groups[1];
             data_list.Add(group);
